@@ -10,12 +10,18 @@
   "author": "alisson-moura",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "express": "^4.17.1",
-    "express-async-errors": "^3.1.1"
+    "express-async-errors": "^3.1.1",
+    "joi": "^17.4.0",
+    "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/express": "^4.17.11",
     "@types/jest": "^26.0.23",
+    "@types/joi": "^17.2.3",
+    "@types/jsonwebtoken": "^8.5.1",
     "jest": "^26.6.3",
     "ts-jest": "^26.5.6",
     "ts-node-dev": "^1.1.6",
