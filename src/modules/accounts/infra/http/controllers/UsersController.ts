@@ -15,10 +15,8 @@ class UsersController {
       password: Joi.string().min(6)
     })
     const { error, value } = schema.validate(request.body)
-    if (error) {
+    if (error) 
       return response.status(400).json({ message: error.message })
-
-    }
 
     const createUser = new CreateUserUseCase(UsersRepository, HashProvider_Bcrypt)
     await createUser.execute(name, email, password)
