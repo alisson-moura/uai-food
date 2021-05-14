@@ -1,12 +1,10 @@
 import { Router } from 'express'
-import { SessionController } from './controllers/SessionController'
-import { UserController } from './controllers/UserController'
+//import { SessionController } from './controllers/SessionController'
+import UsersController from './controllers/UsersController'
 
 const accountsRouter = Router()
-const usersController = new UserController()
-const sessionController = new SessionController()
 
-accountsRouter.post('/', usersController.create)
-accountsRouter.post('/session', sessionController.create)
+accountsRouter.post('/', UsersController.create)
+//accountsRouter.post('/session', sessionController.create)
 
 export { accountsRouter }

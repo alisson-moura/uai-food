@@ -1,3 +1,4 @@
+/*
 import { Request, Response } from "express";
 import Joi from 'joi'
 import { HashProvider_BCrypt } from "../../../../../providers/HashProvider/HashProvider_Bcrypt";
@@ -36,3 +37,4 @@ class SessionController {
   }
 }
 export { SessionController }
+*/

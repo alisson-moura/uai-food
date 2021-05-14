@@ -11,4 +11,4 @@ class HashProvider_BCrypt implements I_HashProvider {
   } 
 
 }
-export { HashProvider_BCrypt }
+export default new HashProvider_BCrypt()

@@ -8,7 +8,7 @@ class TokenProvider_JWT implements I_TokenProvider {
     const decoded = verify(token, authConfig.secret) as I_TokenPayload
     return decoded
   }
-  
+
   create(user_id: string): string {
     const token = sign({}, authConfig.secret, {
       expiresIn: authConfig.expiresIn,
@@ -18,4 +18,4 @@ class TokenProvider_JWT implements I_TokenProvider {
   }
 
 }
-export { TokenProvider_JWT }
+export default new TokenProvider_JWT()
