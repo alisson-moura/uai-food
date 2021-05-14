@@ -29,12 +29,12 @@ class AuthenticateUserUseCase {
   async execute(email: string, password: string): Promise<I_Response> {
     const user = await this.usersRepository.findByEmail(email)
     if (!user) {
-      throw new AppError('E-mail or password is invalid!', 400)
+      throw new AppError('E-mail or password is invalid!', 401)
     }
 
     const passwordMatch = await this.hashProvider.decode(password, user.password)
     if (!passwordMatch) {
-      throw new AppError('E-mail or password is invalid!', 400)
+      throw new AppError('E-mail or password is invalid!', 401)
     }
     
     const token = this.tokenProvider.create(user.id)

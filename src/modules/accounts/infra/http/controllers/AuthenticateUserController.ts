@@ -1,24 +1,12 @@
-/*
+
 import { Request, Response } from "express";
 import Joi from 'joi'
-import { HashProvider_BCrypt } from "../../../../../providers/HashProvider/HashProvider_Bcrypt";
-import { I_HashProvider } from "../../../../../providers/HashProvider/I_HashProvider";
-import { I_TokenProvider } from "../../../../../providers/TokenProvider/I_TokenProvider";
-import { TokenProvider_JWT } from "../../../../../providers/TokenProvider/TokenProvider_JWT";
-import { I_UsersRepository } from "../../../repositories/I_UsersRepository";
-import { CreateSessionUseCase } from "../../../useCases/CreateSessionUseCase";
-import { UsersRepository } from "../../typeorm/repositories/UsersRepository";
+import HashProvider_BCrypt from "../../../../../providers/HashProvider/HashProvider_Bcrypt";
+import TokenProvider_JWT from "../../../../../providers/TokenProvider/TokenProvider_JWT";
+import UsersRepository from "../../typeorm/repositories/UsersRepository";
+import { AuthenticateUserUseCase } from '../../../useCases/AuthenticateUserUseCase'
 
-class SessionController {
-  private usersRepository: I_UsersRepository
-  private hashProvider: I_HashProvider
-  private tokenProvider: I_TokenProvider
-
-  constructor() {
-    this.usersRepository = new UsersRepository()
-    this.hashProvider = new HashProvider_BCrypt()
-    this.tokenProvider = new TokenProvider_JWT()
-  }
+class AuthenticateUserController {
 
   async create(request: Request, response: Response): Promise<Response> {
     const { email, password } = request.body
@@ -31,10 +19,9 @@ class SessionController {
     if (error)
       return response.status(400).json({ message: error.message })
 
-    const createSession = new CreateSessionUseCase(this.usersRepository, this.hashProvider, this.tokenProvider)
-    const result = await createSession.execute(email, password)
+    const authenticateUser = new AuthenticateUserUseCase(UsersRepository, HashProvider_BCrypt, TokenProvider_JWT)
+    const result = await authenticateUser.execute(email, password)
     return response.status(201).json(result)
   }
 }
-export { SessionController }
-*/
+export default new AuthenticateUserController()
