@@ -17,7 +17,7 @@ class CreateUserUseCase {
   async execute(name: string, email: string, password: string) {
     const userAlreadyExists = await this.usersRepository.findByEmail(email)
     if (userAlreadyExists) {
-      throw new AppError('E-mail already in use', 400)
+      throw new AppError('E-mail already in use', 409)
     }
     const hashedPassword = await this.hashProvider.cripto(password)
     await this.usersRepository.create(name, email, hashedPassword)
