@@ -11,7 +11,7 @@ interface I_Response {
     id: string
   }
 }
-class CreateSessionUseCase {
+class AuthenticateUserUseCase {
   private usersRepository: I_UsersRepository
   private hashProvider: I_HashProvider
   private tokenProvider: I_TokenProvider
@@ -51,4 +51,4 @@ class CreateSessionUseCase {
   }
 }
 
-export { CreateSessionUseCase }
+export { AuthenticateUserUseCase }

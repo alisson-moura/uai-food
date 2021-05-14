@@ -2,23 +2,23 @@ import { AppError } from "../../providers/AppError"
 import { User } from "../../modules/accounts/infra/typeorm/entities/User"
 import { Fake_UsersRepository } from "../../modules/accounts/repositories/fake-repositories/Fake_UsersRepository"
 import { I_UsersRepository } from "../../modules/accounts/repositories/I_UsersRepository"
-import { CreateSessionUseCase } from "../../modules/accounts/useCases/CreateSessionUseCase"
+import { AuthenticateUserUseCase } from "../../modules/accounts/useCases/AuthenticateUserUseCase"
 import { I_HashProvider } from "../../providers/HashProvider/I_HashProvider"
-import { HashProvider_BCrypt } from "../../providers/HashProvider/HashProvider_Bcrypt"
+import HashProvider_BCrypt from "../../providers/HashProvider/HashProvider_Bcrypt"
 import { I_TokenProvider } from "../../providers/TokenProvider/I_TokenProvider"
-import { TokenProvider_JWT } from "../../providers/TokenProvider/TokenProvider_JWT"
+import TokenProvider_JWT from "../../providers/TokenProvider/TokenProvider_JWT"
 
 let usersRepository: I_UsersRepository
-let createSessionUseCase: CreateSessionUseCase
+let createSessionUseCase: AuthenticateUserUseCase
 let hashProvider: I_HashProvider
 let tokenProvider: I_TokenProvider
 
 describe('Teste Unitário de Criação de Sessão', () => {
   beforeEach(async () => {
     usersRepository = new Fake_UsersRepository()
-    hashProvider = new HashProvider_BCrypt()
-    tokenProvider = new TokenProvider_JWT()
-    createSessionUseCase = new CreateSessionUseCase(usersRepository, hashProvider, tokenProvider)
+    hashProvider = HashProvider_BCrypt
+    tokenProvider = TokenProvider_JWT
+    createSessionUseCase = new AuthenticateUserUseCase(usersRepository, hashProvider, tokenProvider)
     await usersRepository.create('John Doe', 'john@mail.com', await hashProvider.cripto('123456'))
   })
 

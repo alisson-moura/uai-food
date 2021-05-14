@@ -4,7 +4,7 @@ import { Fake_UsersRepository } from "../../modules/accounts/repositories/fake-r
 import { I_UsersRepository } from "../../modules/accounts/repositories/I_UsersRepository"
 import { CreateUserUseCase } from "../../modules/accounts/useCases/CreateUserUseCase"
 import { I_HashProvider } from "../../providers/HashProvider/I_HashProvider"
-import { HashProvider_BCrypt } from "../../providers/HashProvider/HashProvider_Bcrypt"
+import HashProvider_BCrypt from "../../providers/HashProvider/HashProvider_Bcrypt"
 
 let usersRepository: I_UsersRepository
 let createUserUseCase: CreateUserUseCase
@@ -14,7 +14,7 @@ let hashProvider: I_HashProvider
 describe('Teste Unitário de Criação de usuário', () => {
   beforeEach(async () => {
     usersRepository = new Fake_UsersRepository()
-    hashProvider = new HashProvider_BCrypt()
+    hashProvider = HashProvider_BCrypt
     createUserUseCase = new CreateUserUseCase(usersRepository, hashProvider)
   })
 
@@ -27,7 +27,7 @@ describe('Teste Unitário de Criação de usuário', () => {
 
   test('Não deve ser possivel criar um usuário com um email já existente', async () => {
     await createUserUseCase.execute('John Doe', 'john@mail.com', 'valid_password') // user 01
-    await expect(createUserUseCase.execute('John Doe 2', 'john@mail.com', 'valid_password')).rejects.toEqual(new AppError('E-mail already in use', 400))
+    await expect(createUserUseCase.execute('John Doe 2', 'john@mail.com', 'valid_password')).rejects.toEqual(new AppError('E-mail already in use', 409))
   })
 
   test('A senha deve ser criptografada', async () => {
