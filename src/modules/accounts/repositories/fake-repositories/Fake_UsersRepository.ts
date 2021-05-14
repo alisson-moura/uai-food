@@ -6,7 +6,7 @@ import { I_UsersRepository } from "../I_UsersRepository";
 class Fake_UsersRepository implements I_UsersRepository {
   private users: User[] = []
 
-  async create(name: string, email: string, password: string): Promise<void> {
+  async create(name: string, email: string, password: string): Promise<User> {
     const user = new User()
     Object.assign(user, {
       name,
@@ -16,6 +16,7 @@ class Fake_UsersRepository implements I_UsersRepository {
       created_at: new Date
     })
     this.users.push(user)
+    return user
   }
 
   async findById(id: string): Promise<User> {
