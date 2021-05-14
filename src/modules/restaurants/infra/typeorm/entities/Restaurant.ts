@@ -7,13 +7,12 @@ class Restaurant {
   number: string
   street: string
   uf: string
-  description: string
-  banner_url: string
+  description?: string
+  banner_url?: string
   culinary: string
-  open_hour: Date
-  close_hour: Date
+  open_hour: string
+  close_hour: string
   open_onWeekends: boolean
-  created_at: Date
 }
 
 export { Restaurant }
