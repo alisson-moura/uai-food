@@ -8,10 +8,10 @@ interface I_Restaurant {
   uf: string
   description?: string
   banner_url?: string
-  culinary: string
-  open_hour: string
-  close_hour: string
-  open_onWeekends: boolean
+  type_food: string
+  open_hours: string
+  close_hours: string
+  open_on_weekends: boolean
   owner_id?: string
   id?: string,
   name: string
@@ -19,8 +19,7 @@ interface I_Restaurant {
 
 interface I_RestaurantsRepository {
   create(data: I_Restaurant): Promise<Restaurant>
-  findByName(name: string): Promise<Restaurant>
-  findByCnpj(cnpj: string): Promise<Restaurant>
+  findOne(param: string, value: string): Promise<Restaurant>
 }
 
 export { I_RestaurantsRepository, I_Restaurant }

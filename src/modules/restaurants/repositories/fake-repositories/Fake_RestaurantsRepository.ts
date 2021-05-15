@@ -3,19 +3,19 @@ import { Restaurant } from '../../infra/typeorm/entities/Restaurant'
 import { I_Restaurant, I_RestaurantsRepository } from '../I_RestaurantsRepositories'
 
 class Fake_RestaurantsRepository implements I_RestaurantsRepository {
- 
+
 
   private restaurants: Restaurant[] = []
 
   async create({
     city,
-    close_hour,
+    close_hours,
     cnpj,
-    culinary,
+    type_food,
     name,
     number,
-    open_hour,
-    open_onWeekends,
+    open_hours,
+    open_on_weekends,
     street,
     uf,
     description,
@@ -24,13 +24,13 @@ class Fake_RestaurantsRepository implements I_RestaurantsRepository {
     const restaurant = new Restaurant()
     Object.assign(restaurant, {
       city,
-      close_hour,
+      close_hours,
       cnpj,
-      culinary,
+      type_food,
       name,
       number,
-      open_hour,
-      open_onWeekends,
+      open_hours,
+      open_on_weekends,
       street,
       uf,
       description,
@@ -42,15 +42,9 @@ class Fake_RestaurantsRepository implements I_RestaurantsRepository {
     return restaurant
   }
 
-  async findByName(name: string): Promise<Restaurant> {
-    const restaurant = this.restaurants.find(restaurant => restaurant.name === name)
+  async findOne(param: string, value: string): Promise<Restaurant> {
+    const restaurant = this.restaurants.find(restaurant => (restaurant[param] === value))
     return restaurant
   }
-
-  async findByCnpj(cnpj: string): Promise<Restaurant> {
-    const restaurant = this.restaurants.find(restaurant => restaurant.cnpj === cnpj)
-    return restaurant
-  }
-
 }
 export { Fake_RestaurantsRepository }

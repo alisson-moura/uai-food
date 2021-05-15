@@ -13,8 +13,8 @@ let valid_restaurant = {
     street: 'A valid street',
     uf: "AA",
     cnpj: 'valid cnpj',
-    culinary: 'italian',
-    open_onWeekends: false,
+    type_food: 'italian',
+    open_on_weekends: false,
     close_hour: "18:00",
     open_hour: "08:00",
 }
@@ -27,20 +27,20 @@ describe('Teste unitário de criação de Restaurantes', () => {
     })
 
     test('Deve ser possível criar um restaurante', async () => {
-        const restaurant = await createRestaurant.execute(valid_restaurant, fake_userId)
+        const restaurant = await createRestaurant.execute({ ...valid_restaurant, owner_id: fake_userId })
         expect(restaurant).toHaveProperty('id')
         expect(restaurant.name).toBe('Valid name')
     })
 
     test('Não deve ser possivel criar um restaurante com um nome já existente', async () => {
-        const restaurant = await createRestaurant.execute(valid_restaurant, fake_userId)
-        await expect(createRestaurant.execute({ ...valid_restaurant, cnpj: 'other cnpj' }, fake_userId))
+        const restaurant = await createRestaurant.execute({ ...valid_restaurant, owner_id: fake_userId })
+        await expect(createRestaurant.execute({ ...valid_restaurant, cnpj: 'other cnpj', owner_id: fake_userId }))
             .rejects.toEqual(new AppError('There is already a restaurant with this name', 409))
     })
 
     test('Não deve ser possivel criar um restaurante com um cnpj já existente', async () => {
-        const restaurant = await createRestaurant.execute(valid_restaurant, fake_userId)
-        await expect(createRestaurant.execute({ ...valid_restaurant, name: 'other name' }, fake_userId))
+        const restaurant = await createRestaurant.execute({ ...valid_restaurant, owner_id: fake_userId })
+        await expect(createRestaurant.execute({ ...valid_restaurant, name: 'other name', owner_id: fake_userId }))
             .rejects.toEqual(new AppError('There is already a restaurant with this cnpj', 409))
     })
 })

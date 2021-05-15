@@ -10,35 +10,36 @@ class CreateRestaurantUseCase {
 
     async execute({
         city,
-        close_hour,
+        close_hours,
         cnpj,
-        culinary,
+        type_food,
         description,
         number,
-        open_hour,
-        open_onWeekends,
+        open_hours,
+        open_on_weekends,
         street,
         uf,
-        name
-    }: I_Restaurant, owner_id: string) {
-        let restaurantExists = await this.restaurantsRepository.findByName(name)
+        name,
+        owner_id
+    }: I_Restaurant) {
+        let restaurantExists = await this.restaurantsRepository.findOne('name', name)
         if (restaurantExists)
             throw new AppError('There is already a restaurant with this name', 409)
 
-        restaurantExists = await this.restaurantsRepository.findByCnpj(cnpj)
+        restaurantExists = await this.restaurantsRepository.findOne('cnpj', cnpj)
         if (restaurantExists)
             throw new AppError('There is already a restaurant with this cnpj', 409)
 
         const restaurant = await this.restaurantsRepository.create({
             owner_id,
             city,
-            close_hour,
+            close_hours,
             cnpj,
-            culinary,
+            type_food,
             description,
             number,
-            open_hour,
-            open_onWeekends,
+            open_hours,
+            open_on_weekends,
             street,
             uf,
             name

@@ -6,6 +6,7 @@ const httpErrors = (error: Error, request: Request, response: Response, next: Ne
     response.status(error.statusCode).json({ message: error.message })
   }
   else {
+    console.error(error)
     response.status(500).json({ message: 'Internal server error!' })
   } 
 }

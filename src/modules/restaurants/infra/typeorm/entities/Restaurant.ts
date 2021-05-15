@@ -1,18 +1,54 @@
+import { User } from "../../../../../modules/accounts/infra/typeorm/entities/User"
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, JoinTable } from "typeorm"
+import Joi from "joi"
+
+@Entity('restaurants')
 class Restaurant {
+  @PrimaryGeneratedColumn('uuid')
   id: string
+
+  @ManyToOne(() => User)
+  @JoinColumn({name: 'owner_id'})
+  owner: User
+
+  @Column()
   owner_id: string
+
+  @Column()
   name: string
+
+  @Column()
   cnpj: string
+
+  @Column()
   city: string
+
+  @Column()
   number: string
+
+  @Column()
   street: string
+
+  @Column()
   uf: string
+
+  @Column()
   description?: string
+
+  @Column()
   banner_url?: string
-  culinary: string
-  open_hour: string
-  close_hour: string
-  open_onWeekends: boolean
+
+  @Column()
+  type_food: string
+
+  @Column()
+  open_hours: string
+
+  @Column()
+  close_hours: string
+
+  @Column('boolean')
+  open_on_weekends: boolean
 }
 
 export { Restaurant }
