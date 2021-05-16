@@ -1,6 +1,6 @@
 import crypto from 'crypto'
 import { Restaurant } from '../../infra/typeorm/entities/Restaurant'
-import { I_Restaurant, I_RestaurantsRepository } from '../I_RestaurantsRepositories'
+import { I_Restaurant, I_RestaurantsRepository } from '../I_RestaurantsRepository'
 
 class Fake_RestaurantsRepository implements I_RestaurantsRepository {
 

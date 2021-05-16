@@ -1,4 +1,4 @@
-import { I_Restaurant, I_RestaurantsRepository } from "../../../repositories/I_RestaurantsRepositories";
+import { I_Restaurant, I_RestaurantsRepository } from "../../../repositories/I_RestaurantsRepository";
 import { getRepository, Repository } from "typeorm";
 import { Restaurant } from "../entities/Restaurant";
 

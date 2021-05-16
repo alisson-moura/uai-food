@@ -1,5 +1,5 @@
 import { AppError } from "../../../providers/AppError"
-import { I_RestaurantsRepository, I_Restaurant } from "../repositories/I_RestaurantsRepositories"
+import { I_RestaurantsRepository, I_Restaurant } from "../repositories/I_RestaurantsRepository"
 
 class CreateRestaurantUseCase {
     private restaurantsRepository: I_RestaurantsRepository

@@ -1,5 +1,5 @@
 import { Fake_RestaurantsRepository } from "../../modules/restaurants/repositories/fake-repositories/Fake_RestaurantsRepository"
-import { I_RestaurantsRepository } from "../../modules/restaurants/repositories/I_RestaurantsRepositories"
+import { I_RestaurantsRepository } from "../../modules/restaurants/repositories/I_RestaurantsRepository"
 import { CreateRestaurantUseCase } from "../../modules/restaurants/useCases/CreateRestarauntUseCase"
 import { AppError } from "../../providers/AppError"
 
@@ -15,8 +15,8 @@ let valid_restaurant = {
     cnpj: 'valid cnpj',
     type_food: 'italian',
     open_on_weekends: false,
-    close_hour: "18:00",
-    open_hour: "08:00",
+    close_hours: "18:00",
+    open_hours: "08:00",
 }
 
 describe('Teste unitário de criação de Restaurantes', () => {
