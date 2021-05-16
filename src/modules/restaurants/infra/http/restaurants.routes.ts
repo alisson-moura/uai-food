@@ -7,5 +7,6 @@ const restaurantsRouter = Router()
 
 restaurantsRouter.post('/', authMiddleware, RestaurantsController.create)
 restaurantsRouter.post('/:restaurant_id', authMiddleware, ItemsController.create)
+restaurantsRouter.put('/:restaurant_id/:item_id', authMiddleware, ItemsController.update)
 
 export { restaurantsRouter }

@@ -40,6 +40,31 @@ class ItemsRepository implements I_ItemsRepository {
         return item
     }
 
+    async findById(id: string): Promise<I_Item> {
+        const item = await this.repository.findOne({ where: { id } })
+        return item
+    }
+
+    async update({
+        name,
+        price,
+        restaurant_id,
+        weight,
+        description,
+        ingredients
+    }: I_Item): Promise<Item> {
+        const item = this.repository.create({
+            name,
+            price,
+            restaurant_id,
+            weight,
+            description,
+            ingredients
+        })
+        await this.repository.save(item)
+        return item
+    }
+
 }
 
 export default new ItemsRepository()

@@ -9,6 +9,7 @@ import { Item } from "../../modules/restaurants/infra/typeorm/entities/Item"
 import { AddItemUseCase } from "../../modules/restaurants/useCases/AddItemUseCase"
 import { expression } from "joi"
 import FormatMoney from "../../providers/FormatMoney/FormatMoney"
+import { I_FormatMoney } from "providers/FormatMoney/I_FormatMoney"
 
 let restaurantsRepository: I_RestaurantsRepository
 let itemsRepository: I_ItemsRepository
