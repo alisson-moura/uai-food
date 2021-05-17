@@ -7,10 +7,10 @@ import { accountsRouter } from '../../modules/accounts/infra/http/accounts.route
 const routes = Router()
 
 routes.use('/api-docs', swaggerUi.server)
-routes.get('/api-docs', swaggerUi.setup(swaggerDocument));
-
-routes.use('/', (request: Request, response: Response) => response.redirect('/api-docs'))
 routes.use('/accounts', accountsRouter)
 routes.use('/restaurants', restaurantsRouter)
+
+routes.get('/api-docs', swaggerUi.setup(swaggerDocument));
+routes.get('/', (request: Request, response: Response) => response.redirect('/api-docs'))
 
 export { routes }
