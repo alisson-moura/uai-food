@@ -57,9 +57,7 @@ class UpdateItemUseCase {
         if (item.restaurant_id != restaurant.id) {
             throw new AppError('This item does not belong to this restaurant.', 409)
         }
-        console.log(id)
-        console.log(name)
-        console.log(item.name)
+   
         if (name != item.name) {
             const itemExists = await this.itemsRepository.findByNameAndRestaurant(name, restaurant_id)
             if (itemExists) {
