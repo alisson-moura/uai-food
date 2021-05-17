@@ -6,7 +6,7 @@ import { accountsRouter } from '../../modules/accounts/infra/http/accounts.route
 
 const routes = Router()
 
-routes.use('/api-docs', swaggerUi.server)
+routes.use('/api-docs', swaggerUi.serve)
 routes.use('/accounts', accountsRouter)
 routes.use('/restaurants', restaurantsRouter)
 

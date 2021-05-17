@@ -1,0 +1,750 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Uai Food",
+    "description": "Uma API para cadastro de restaurantes e pratos.",
+    "contact": {
+      "name": "Alisson Moura",
+      "url": "https://github.com/alisson-moura",
+      "email": "alisson.mo.moura@outlook.com.br"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8000/",
+      "description": "Local server"
+    }
+  ],
+  "paths": {
+    "/accounts/auth": {
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Autenticação de um usuário",
+        "description": "Autentica o usuário e retorna o token JWT",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "email": "john@mail.com",
+                  "password": "123456"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Error: Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "E-mail or password is inválid"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts": {
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Criar usuário",
+        "description": "Criação de usuários responsáveis por restaurantes",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "John Doe",
+                  "email": "john@mail.com",
+                  "password": "123456"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "E-mail already in use."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/restaurants": {
+      "post": {
+        "tags": [
+          "Restaurants"
+        ],
+        "summary": "Criar um novo restaurante",
+        "description": "Criar um novo restaurante fornecendo as informações necessárias",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Restaurant"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "owner_id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "cnpj": {
+                      "type": "string"
+                    },
+                    "city": {
+                      "type": "string"
+                    },
+                    "street": {
+                      "type": "string"
+                    },
+                    "number": {
+                      "type": "string"
+                    },
+                    "uf": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "type_food": {
+                      "type": "string"
+                    },
+                    "open_hours": {
+                      "type": "string"
+                    },
+                    "close_hours": {
+                      "type": "string"
+                    },
+                    "open_on_weekends": {
+                      "type": "boolean"
+                    }
+                  },
+                  "example": {
+                    "id": "837e051d-0977-4c00-a199-12cb6e40892e",
+                    "owner_id": "013778d6-ccd8-46c7-b68c-fe8688531dd1",
+                    "name": "Restaurante 01",
+                    "cnpj": "xxxxxxxxxxxxxx",
+                    "city": "São José do Rio Preto",
+                    "street": "Rua 01",
+                    "number": "272A",
+                    "uf": "SP",
+                    "description": "Um restaurante muito bom.",
+                    "type_food": "comida caseira",
+                    "open_hours": "10:00",
+                    "close_hours": "21:00",
+                    "open_on_weekends": true
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "There is already a restaurant with this name/cnpj."
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Restaurants"
+        ],
+        "summary": "Buscar por restaurantes",
+        "description": "Realizar busca por restaurantes, parâmetros de pesquisa: city,type_food e item",
+        "parameters": [
+          {
+            "name": "city",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "required": false
+          },
+          {
+            "name": "type_food",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "required": false
+          },
+          {
+            "name": "item",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "restaurants": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/Restaurant"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/restaurants/{restaurant_id}": {
+      "post": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Criar um novo item para um restaurante",
+        "description": "Criar um novo item para um restaurante.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "restaurant_id",
+            "in": "path",
+            "description": "Id do restaurante",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Item"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "restaurant_id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "weight": {
+                      "type": "number"
+                    },
+                    "price": {
+                      "type": "string"
+                    },
+                    "ingredients": {
+                      "type": "array"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "id": "837e051d-0977-4c00-a199-12cb6e40892e",
+                    "restaurant_id": "013778d6-ccd8-46c7-b68c-fe8688531dd1",
+                    "name": "Item 01",
+                    "weight": 350,
+                    "price": "R$ 12,50",
+                    "ingredients": [
+                      "ingrediente01",
+                      "ingrediente02"
+                    ],
+                    "description": "Um prato muito bom."
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "In this restaurant there is already an item with this name."
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "This restaurant not found."
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "This restaurant does not belong to this user."
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Restaurants"
+        ],
+        "summary": "Buscar por restaurantes",
+        "description": "Realizar busca por restaurantes, parâmetros de pesquisa: city,type_food e item",
+        "parameters": [
+          {
+            "name": "restaurant_id",
+            "in": "path",
+            "description": "Id do restaurante",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Restaurant"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "This restaurant not found."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/restaurants/{restaurant_id}/{item_id}": {
+      "put": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Atualizar um item",
+        "description": "Atualizar uma ou mais informações de um item.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "restaurant_id",
+            "in": "path",
+            "description": "Id do restaurante",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "item_id",
+            "in": "path",
+            "description": "Id do item",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Item"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "restaurant_id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "weight": {
+                      "type": "number"
+                    },
+                    "price": {
+                      "type": "string"
+                    },
+                    "ingredients": {
+                      "type": "array"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "id": "837e051d-0977-4c00-a199-12cb6e40892e",
+                    "restaurant_id": "013778d6-ccd8-46c7-b68c-fe8688531dd1",
+                    "name": "Item 01",
+                    "weight": 350,
+                    "price": "R$ 12,50",
+                    "ingredients": [
+                      "ingrediente01",
+                      "ingrediente02"
+                    ],
+                    "description": "Um prato muito bom."
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "In this restaurant there is already an item with this name."
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "This restaurant not found."
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "This restaurant does not belong to this user."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Item": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string"
+        },
+        "weight": {
+          "type": "number"
+        },
+        "ingredients": {
+          "type": "array"
+        }
+      },
+      "example": {
+        "name": "Item 01",
+        "description": "Um item muito bom",
+        "price": 12.80,
+        "weight": 350,
+        "ingredients": [
+          "ingrediente01",
+          "ingrediente02"
+        ]
+      }
+    },
+    "Restaurant": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "cnpj": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string"
+        },
+        "number": {
+          "type": "string"
+        },
+        "uf": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "type_food": {
+          "type": "string"
+        },
+        "open_hours": {
+          "type": "string"
+        },
+        "close_hours": {
+          "type": "string"
+        },
+        "open_on_weekends": {
+          "type": "boolean"
+        }
+      },
+      "example": {
+        "name": "Restaurante 01",
+        "cnpj": "xxxxxxxxxxxxxx",
+        "city": "São José do Rio Preto",
+        "street": "Rua 01",
+        "number": "272A",
+        "uf": "SP",
+        "description": "Um restaurante muito bom.",
+        "type_food": "comida caseira",
+        "open_hours": "10:00",
+        "close_hours": "21:00",
+        "open_on_weekends": true
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
