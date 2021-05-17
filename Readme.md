@@ -12,9 +12,9 @@
 - [x] Cadastrar um item para o restaurante
   - [x] Somente usuário autenticado pode criar um item
   - [x] o item deve conter um preço
-- [ ] Atualizar os dados de um item
-  - [ ] Somente usuário autenticado pode atualizar um item
+- [x] Atualizar os dados de um item
+  - [x] Somente usuário autenticado pode atualizar um item
   
 - [ ] Listar os restaurantes
-  - [ ] Listar os restaurantes de acordo com os parametros: [Cidade, Distância, Tipo de cozinha, prato]
+  - [ ] Listar os restaurantes de acordo com os parametros: [Cidade, Tipo de cozinha, Item]
   - [ ] A listagem pode conter um ou mais destes parâmetros e deve trazer a junção de todos

@@ -17,9 +17,16 @@ interface I_Restaurant {
   name: string
 }
 
+interface I_FindRestaurants {
+  city?: string
+  item?: string
+  food?: string
+}
+
 interface I_RestaurantsRepository {
   create(data: I_Restaurant): Promise<Restaurant>
   findOne(param: string, value: string): Promise<Restaurant>
+  find({city,food,item}: I_FindRestaurants):Promise<Restaurant[]>
 }
 
-export { I_RestaurantsRepository, I_Restaurant }
+export { I_RestaurantsRepository, I_Restaurant, I_FindRestaurants }

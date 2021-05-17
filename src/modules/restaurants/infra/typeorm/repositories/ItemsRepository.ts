@@ -9,6 +9,11 @@ class ItemsRepository implements I_ItemsRepository {
         this.repository = getRepository(Item)
     }
 
+    async findByName(name: string): Promise<Item[]> {
+        const items = await this.repository.find({ where: { name } })
+        return items
+    }
+
     async create({
         name,
         price,

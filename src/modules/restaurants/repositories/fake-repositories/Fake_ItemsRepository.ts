@@ -62,5 +62,9 @@ class Fake_ItemsRepository implements I_ItemsRepository {
     return this.items[itemIndex]
   }
 
+  async findByName(name: string): Promise<Item[]> {
+    return this.items.filter(item => item.name === name)
+  }
+
 }
 export { Fake_ItemsRepository }

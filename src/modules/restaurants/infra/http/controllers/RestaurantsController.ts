@@ -1,5 +1,7 @@
 import { Request, Response } from 'express'
 import Joi from 'joi'
+import { I_FindRestaurants } from '../../../repositories/I_RestaurantsRepository'
+import { ListRestaurantsUseCase } from '../../../useCases/ListRestaurantsUseCase'
 import { CreateRestaurantUseCase } from '../../../useCases/CreateRestarauntUseCase'
 import RestaurantsRepository from '../../typeorm/repositories/RestaurantsRepository'
 class RestaurantsController {
@@ -30,6 +32,14 @@ class RestaurantsController {
         })
 
         return response.status(201).json(restaurant)
+    }
+
+    async index(request: Request, response: Response): Promise<Response> {
+        const { city, food, item } = request.query
+
+        const listRestaurantsUseCase = new ListRestaurantsUseCase(RestaurantsRepository)
+        const restaurants = await listRestaurantsUseCase.execute({ city, food, item } as I_FindRestaurants)
+        return response.json(restaurants)
     }
 }
 

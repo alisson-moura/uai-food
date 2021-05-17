@@ -1,6 +1,7 @@
 import { User } from "../../../../../modules/accounts/infra/typeorm/entities/User"
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, JoinTable } from "typeorm"
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, JoinTable, OneToMany } from "typeorm"
 import Joi from "joi"
+import { Item } from "./Item"
 
 @Entity('restaurants')
 class Restaurant {
@@ -49,6 +50,9 @@ class Restaurant {
 
   @Column('boolean')
   open_on_weekends: boolean
+
+  @OneToMany(() => Item, item => item.restaurant)
+  items: Item[]
 }
 
 export { Restaurant }

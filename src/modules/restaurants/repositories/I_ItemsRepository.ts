@@ -14,6 +14,7 @@ interface I_Item {
 interface I_ItemsRepository {
     create(data: I_Item): Promise<Item>
     findByNameAndRestaurant(name: string, restaurant_id: string): Promise<Item>
+    findByName(name: string): Promise<Item[]>
     findById(id: string): Promise<I_Item>
     update(data: I_Item): Promise<Item>
 }
