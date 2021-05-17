@@ -1,6 +1,6 @@
 ## Requisitos não funcionais
 - [ ] Todas as rotas devem ser documentadas com swagger
-- [ ] Todas os casos de uso devem ser testados com testes unitários 
+- [x] Todas os casos de uso devem ser testados com testes unitários 
 
 ## Requisitos Funcionais
 - [x] Cadastro de usuário
@@ -15,6 +15,6 @@
 - [x] Atualizar os dados de um item
   - [x] Somente usuário autenticado pode atualizar um item
   
-- [ ] Listar os restaurantes
-  - [ ] Listar os restaurantes de acordo com os parametros: [Cidade, Tipo de cozinha, Item]
-  - [ ] A listagem pode conter um ou mais destes parâmetros e deve trazer a junção de todos
+- [x] Listar os restaurantes
+  - [x] Listar os restaurantes de acordo com os parametros: [Cidade, Tipo de cozinha, Item]
+  - [x] A listagem pode conter um ou mais destes parâmetros e deve trazer a junção de todos
