@@ -126,4 +126,14 @@ describe('Teste unitário de atualização de um Item', () => {
             name: 'Item 02'
         })).rejects.toEqual(new AppError('In this restaurant there is already an item with this name.', 409))
     })
+
+    test('Não deve ser possivel atualizar um item inexistente', async () => {
+        await expect(updateItemUseCase.execute({
+            id: 'invalid_item_id',
+            user_id: restaurant01.owner_id,
+            description: 'A nice restaurant 02',
+            restaurant_id: restaurant01.id,
+            name: 'Item 02'
+        })).rejects.toEqual(new AppError('This item not found.', 404))
+    })
 })
