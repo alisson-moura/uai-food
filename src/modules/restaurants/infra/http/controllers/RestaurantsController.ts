@@ -4,6 +4,7 @@ import { I_FindRestaurants } from '../../../repositories/I_RestaurantsRepository
 import { ListRestaurantsUseCase } from '../../../useCases/ListRestaurantsUseCase'
 import { CreateRestaurantUseCase } from '../../../useCases/CreateRestarauntUseCase'
 import RestaurantsRepository from '../../typeorm/repositories/RestaurantsRepository'
+import { ShowDetailsRestaurantUseCase } from '../../../useCases/ShowDetailsRestaurant'
 class RestaurantsController {
 
     async create(request: Request, response: Response): Promise<Response> {
@@ -40,6 +41,13 @@ class RestaurantsController {
         const listRestaurantsUseCase = new ListRestaurantsUseCase(RestaurantsRepository)
         const restaurants = await listRestaurantsUseCase.execute({ city, food, item } as I_FindRestaurants)
         return response.json(restaurants)
+    }
+
+    async show(request: Request, response: Response): Promise<Response>{
+        const {restaurant_id} = request.params
+        const showDetailsRestaurantUseCase = new ShowDetailsRestaurantUseCase(RestaurantsRepository)
+        const restaurant = await showDetailsRestaurantUseCase.execute(restaurant_id)
+        return response.json(restaurant)
     }
 }
 

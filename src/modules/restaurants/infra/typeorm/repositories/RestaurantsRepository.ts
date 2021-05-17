@@ -84,8 +84,10 @@ class RestaurantsRepository implements I_RestaurantsRepository {
         const restaurant = await this.respository.findOne({
             where: {
                 [param]: value
-            }
-        })
+            },
+            relations: ['items']
+        }
+        )
         return restaurant
     }
 }
