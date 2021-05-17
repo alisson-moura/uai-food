@@ -45,6 +45,11 @@ class RestaurantsController {
 
     async show(request: Request, response: Response): Promise<Response>{
         const {restaurant_id} = request.params
+
+        if(!restaurant_id) {
+            return response.status(400).json({message: "Invalid id provided."})
+        }
+
         const showDetailsRestaurantUseCase = new ShowDetailsRestaurantUseCase(RestaurantsRepository)
         const restaurant = await showDetailsRestaurantUseCase.execute(restaurant_id)
         return response.json(restaurant)
