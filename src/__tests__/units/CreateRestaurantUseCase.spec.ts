@@ -32,13 +32,13 @@ describe('Teste unitário de criação de Restaurantes', () => {
         expect(restaurant.name).toBe('Valid name')
     })
 
-    test('Não deve ser possivel criar um restaurante com um nome já existente', async () => {
+    test('Não deve ser possível criar um restaurante com um nome já existente', async () => {
         const restaurant = await createRestaurant.execute({ ...valid_restaurant, owner_id: fake_userId })
         await expect(createRestaurant.execute({ ...valid_restaurant, cnpj: 'other cnpj', owner_id: fake_userId }))
             .rejects.toEqual(new AppError('There is already a restaurant with this name', 409))
     })
 
-    test('Não deve ser possivel criar um restaurante com um cnpj já existente', async () => {
+    test('Não deve ser possível criar um restaurante com um cnpj já existente', async () => {
         const restaurant = await createRestaurant.execute({ ...valid_restaurant, owner_id: fake_userId })
         await expect(createRestaurant.execute({ ...valid_restaurant, name: 'other name', owner_id: fake_userId }))
             .rejects.toEqual(new AppError('There is already a restaurant with this cnpj', 409))

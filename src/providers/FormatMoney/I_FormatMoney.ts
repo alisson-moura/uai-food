@@ -3,4 +3,4 @@ interface I_FormatMoney {
     formatter(value: number): number
 }
 
-export {I_FormatMoney}
+export { I_FormatMoney }

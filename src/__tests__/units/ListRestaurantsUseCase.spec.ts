@@ -2,7 +2,6 @@ import { Restaurant } from "modules/restaurants/infra/typeorm/entities/Restauran
 import { Fake_RestaurantsRepository } from "../../modules/restaurants/repositories/fake-repositories/Fake_RestaurantsRepository"
 import { I_RestaurantsRepository } from "../../modules/restaurants/repositories/I_RestaurantsRepository"
 import { ListRestaurantsUseCase } from "../../modules/restaurants/useCases/ListRestaurantsUseCase"
-import { AppError } from "../../providers/AppError"
 
 let restaurantsRepository: I_RestaurantsRepository
 let listRestaurantsUseCase: ListRestaurantsUseCase

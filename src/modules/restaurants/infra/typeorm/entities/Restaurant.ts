@@ -1,6 +1,5 @@
 import { User } from "../../../../../modules/accounts/infra/typeorm/entities/User"
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, JoinTable, OneToMany } from "typeorm"
-import Joi from "joi"
 import { Item } from "./Item"
 
 @Entity('restaurants')

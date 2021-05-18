@@ -2,7 +2,6 @@ import { Restaurant } from "modules/restaurants/infra/typeorm/entities/Restauran
 import { ShowDetailsRestaurantUseCase } from "../../modules/restaurants/useCases/ShowDetailsRestaurant"
 import { Fake_RestaurantsRepository } from "../../modules/restaurants/repositories/fake-repositories/Fake_RestaurantsRepository"
 import { I_RestaurantsRepository } from "../../modules/restaurants/repositories/I_RestaurantsRepository"
-import { ListRestaurantsUseCase } from "../../modules/restaurants/useCases/ListRestaurantsUseCase"
 import { AppError } from "../../providers/AppError"
 
 let restaurantsRepository: I_RestaurantsRepository
@@ -34,7 +33,7 @@ describe('Teste unitário de exibição de detalhes de um Restaurante', () => {
         expect(restaurant.owner_id).toBe(restaurant01.owner_id)
     })
 
-    test('Não deve ser possivel exibir os detalhes de um restaurante inexistente', async () => {
+    test('Não deve ser possível exibir os detalhes de um restaurante inexistente', async () => {
         await expect(showDetailsRestaurantUseCase.execute('invalid_id')).rejects.toEqual(new AppError('This restaurant not found.', 404))
     })
 })

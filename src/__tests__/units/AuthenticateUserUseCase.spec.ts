@@ -1,5 +1,4 @@
 import { AppError } from "../../providers/AppError"
-import { User } from "../../modules/accounts/infra/typeorm/entities/User"
 import { Fake_UsersRepository } from "../../modules/accounts/repositories/fake-repositories/Fake_UsersRepository"
 import { I_UsersRepository } from "../../modules/accounts/repositories/I_UsersRepository"
 import { AuthenticateUserUseCase } from "../../modules/accounts/useCases/AuthenticateUserUseCase"
@@ -22,17 +21,17 @@ describe('Teste Unitário de Criação de Sessão', () => {
     await usersRepository.create('John Doe', 'john@mail.com', await hashProvider.cripto('123456'))
   })
 
-  test('Deve ser possivel realizar uma nova sessão/autenticação na API', async () => {
+  test('Deve ser possível realizar uma nova sessão/autenticação na API', async () => {
     const result = await createSessionUseCase.execute('john@mail.com', '123456')
     expect(result.user).toHaveProperty('id')
     expect(result).toHaveProperty('token')
   })
 
-  test('Não deve ser possivel realizar uma nova sessão com um email inválido', async () => {
+  test('Não deve ser possível realizar uma nova sessão com um email inválido', async () => {
     await expect(createSessionUseCase.execute('invalid_mail@mail.com', '123456')).rejects.toEqual(new AppError('E-mail or password is invalid!', 401))
   })
 
-  test('Não deve ser possivel realizar uma nova sessão com uma senha inválido', async () => {
+  test('Não deve ser possível realizar uma nova sessão com uma senha inválido', async () => {
     await expect(createSessionUseCase.execute('john@mail.com', 'invalid_password')).rejects.toEqual(new AppError('E-mail or password is invalid!', 401))
   })
 })

@@ -3,7 +3,6 @@ import { I_FormatMoney } from "providers/FormatMoney/I_FormatMoney"
 import { Item } from "../infra/typeorm/entities/Item"
 import { I_ItemsRepository } from "../repositories/I_ItemsRepository"
 import { I_RestaurantsRepository } from "../repositories/I_RestaurantsRepository"
-import { Console } from "console"
 
 interface I_Request {
     name?: string
@@ -57,7 +56,7 @@ class UpdateItemUseCase {
         if (item.restaurant_id != restaurant.id) {
             throw new AppError('This item does not belong to this restaurant.', 409)
         }
-   
+
         if (name != item.name) {
             const itemExists = await this.itemsRepository.findByNameAndRestaurant(name, restaurant_id)
             if (itemExists) {
@@ -65,7 +64,7 @@ class UpdateItemUseCase {
             }
         }
 
-      
+
         if (price) {
             price = this.formatMoney.formatter(price)
         }

@@ -57,7 +57,7 @@ describe('Teste unitário de adição de Items a um restaurante', () => {
 
     })
 
-    test('Deve ser possivel criar um item para um restaurant válido', async () => {
+    test('Deve ser possível criar um item para um restaurant válido', async () => {
         const item = await addItemUse.execute({
             name: "Valid item",
             price: 15.90,
@@ -68,14 +68,14 @@ describe('Teste unitário de adição de Items a um restaurante', () => {
         })
 
         const itemInRepository = await itemsRepository.findByNameAndRestaurant(item.name, item.restaurant_id)
-        
+
         expect(item).toHaveProperty('id')
         expect(item.name).toBe('Valid item')
         expect(item.price).toBe('R$ 15,90')
         expect(itemInRepository.price).toBe(1590)
     })
 
-    test('Não deve ser possivel criar um item para um restaurante que não pertence ao usuário solicitante',
+    test('Não deve ser possível criar um item para um restaurante que não pertence ao usuário solicitante',
         async () => {
             await expect(addItemUse.execute({
                 name: "Valid item",
@@ -87,7 +87,7 @@ describe('Teste unitário de adição de Items a um restaurante', () => {
             })).rejects.toEqual(new AppError('This restaurant does not belong to this user.', 403))
         })
 
-    test("Não deve ser possivel criar um item para um restaurante inválido/inexistente", async () => {
+    test("Não deve ser possível criar um item para um restaurante inválido/inexistente", async () => {
         await expect(addItemUse.execute({
             name: "Valid item",
             price: 15.90,
@@ -98,7 +98,7 @@ describe('Teste unitário de adição de Items a um restaurante', () => {
         })).rejects.toEqual(new AppError('This restaurant not found.', 404))
     })
 
-    test('Não deve ser possivel criar dois items com o mesmo nome para o mesmo restaurante', async () => {
+    test('Não deve ser possível criar dois items com o mesmo nome para o mesmo restaurante', async () => {
         await addItemUse.execute({
             name: "Valid item",
             price: 15.90,

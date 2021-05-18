@@ -1,5 +1,5 @@
 import { AppError } from "../../../providers/AppError"
-import { I_FindRestaurants, I_RestaurantsRepository } from "../repositories/I_RestaurantsRepository"
+import { I_RestaurantsRepository } from "../repositories/I_RestaurantsRepository"
 
 class ShowDetailsRestaurantUseCase {
     private restaurantsRepository: I_RestaurantsRepository
@@ -12,7 +12,7 @@ class ShowDetailsRestaurantUseCase {
     async execute(id: string) {
         const restaurants = await this.restaurantsRepository.findOne('id', id)
 
-        if(!restaurants) {
+        if (!restaurants) {
             throw new AppError('This restaurant not found.', 404)
         }
 

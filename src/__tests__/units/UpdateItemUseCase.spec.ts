@@ -2,12 +2,9 @@ import { Fake_ItemsRepository } from "../../modules/restaurants/repositories/fak
 import { I_ItemsRepository } from "../../modules/restaurants/repositories/I_ItemsRepository"
 import { Fake_RestaurantsRepository } from "../../modules/restaurants/repositories/fake-repositories/Fake_RestaurantsRepository"
 import { I_RestaurantsRepository } from "../../modules/restaurants/repositories/I_RestaurantsRepository"
-import { CreateRestaurantUseCase } from "../../modules/restaurants/useCases/CreateRestarauntUseCase"
 import { AppError } from "../../providers/AppError"
 import { Restaurant } from "../../modules/restaurants/infra/typeorm/entities/Restaurant"
 import { Item } from "../../modules/restaurants/infra/typeorm/entities/Item"
-import { AddItemUseCase } from "../../modules/restaurants/useCases/AddItemUseCase"
-import { expression } from "joi"
 import FormatMoney from "../../providers/FormatMoney/FormatMoney"
 import { I_FormatMoney } from "providers/FormatMoney/I_FormatMoney"
 import { UpdateItemUseCase } from "../../modules/restaurants/useCases/UpdateItemUseCase"
@@ -76,7 +73,7 @@ describe('Teste unitário de atualização de um Item', () => {
         })
     })
 
-    test('Deve ser possivel atualizar um item válido', async () => {
+    test('Deve ser possível atualizar um item válido', async () => {
         const updatedItem = await updateItemUseCase.execute({
             id: item01.id,
             user_id: restaurant01.owner_id,
@@ -90,7 +87,7 @@ describe('Teste unitário de atualização de um Item', () => {
         expect(updatedItem.price).toBe('R$ 15,90')
     })
 
-    test('Não deve ser possivel atualizar um item de um restaurante com um usuário inválido', async () => {
+    test('Não deve ser possível atualizar um item de um restaurante com um usuário inválido', async () => {
         await expect(updateItemUseCase.execute({
             id: item01.id,
             user_id: 'invalid_user_uuid',
@@ -99,7 +96,7 @@ describe('Teste unitário de atualização de um Item', () => {
         })).rejects.toEqual(new AppError('This restaurant does not belong to this user.', 403))
     })
 
-    test('Não deve ser possivel atualizar um item de um restaurante inexistente', async () => {
+    test('Não deve ser possível atualizar um item de um restaurante inexistente', async () => {
         await expect(updateItemUseCase.execute({
             id: item01.id,
             user_id: restaurant01.owner_id,
@@ -108,7 +105,7 @@ describe('Teste unitário de atualização de um Item', () => {
         })).rejects.toEqual(new AppError('This restaurant not found.', 404))
     })
 
-    test('Não deve ser possivel atualizar um item que não pertence ao restaurante fornecido', async () => {
+    test('Não deve ser possível atualizar um item que não pertence ao restaurante fornecido', async () => {
         await expect(updateItemUseCase.execute({
             id: item01.id,
             user_id: restaurant01.owner_id,
@@ -117,7 +114,7 @@ describe('Teste unitário de atualização de um Item', () => {
         })).rejects.toEqual(new AppError('This item does not belong to this restaurant.', 409))
     })
 
-    test('Não deve ser possivel atualizar o nome de um item caso já exista outro com mesmo nome no restaurante ', async () => {
+    test('Não deve ser possível atualizar o nome de um item caso já exista outro com mesmo nome no restaurante ', async () => {
         await expect(updateItemUseCase.execute({
             id: item01.id,
             user_id: restaurant01.owner_id,
@@ -127,7 +124,7 @@ describe('Teste unitário de atualização de um Item', () => {
         })).rejects.toEqual(new AppError('In this restaurant there is already an item with this name.', 409))
     })
 
-    test('Não deve ser possivel atualizar um item inexistente', async () => {
+    test('Não deve ser possível atualizar um item inexistente', async () => {
         await expect(updateItemUseCase.execute({
             id: 'invalid_item_id',
             user_id: restaurant01.owner_id,

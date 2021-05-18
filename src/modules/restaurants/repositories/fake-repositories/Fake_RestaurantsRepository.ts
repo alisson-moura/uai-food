@@ -1,5 +1,4 @@
 import crypto from 'crypto'
-import ItemsRepository from 'modules/restaurants/infra/typeorm/repositories/ItemsRepository'
 import { Restaurant } from '../../infra/typeorm/entities/Restaurant'
 import { I_FindRestaurants, I_Restaurant, I_RestaurantsRepository } from '../I_RestaurantsRepository'
 import { Fake_ItemsRepository } from './Fake_ItemsRepository'
